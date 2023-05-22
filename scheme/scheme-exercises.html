@@ -1,0 +1,404 @@
+
+<!-- saved from url=(0060)https://inf.ug.edu.pl/~schwarzw/zadania/ZadScheme-2023a.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Christoph Schwarzweller: Scheme</title>
+<link rel="stylesheet" type="text/css" href="./scheme-exercises_files/cs.css">
+</head>
+
+<body class="main">
+
+<br>
+<h2> Exercises (Scheme) </h2>
+<br>
+
+
+<ol>
+
+<li>  What are the values of the following expressions?
+<br><br>
+<pre>&gt; 10 <br><br>
+&gt; (+ 5 3 4) <br><br>
+&gt; (- 9 1) <br><br>
+&gt; (/ 6 2) <br><br>
+&gt; (+ ( * 2 4) (- 4 6)) <br><br>
+&gt; (let ((a 1) (b 2)) (+ a b (* a b))) <br><br>
+&gt; a <br><br>
+&gt; (define a 3) <br><br>
+&gt; a<br><br>
+&gt; (define b (+ a 1)) <br><br>
+&gt; (+ a b (* a b)) <br><br>
+&gt; (= a b) <br><br>
+&gt; (if (and (&gt; b a) (&lt; b (* a b))) 
+      b 
+      a) <br><br>
+&gt; (cond ((= a 4) 6) 
+        ((= b 4) (+ 6 7 a))
+        (else    25))
+</pre> 
+
+
+</li><li> Please define functions <tt>(new.&lt; x y)</tt>, <tt>(new.&gt; x y)</tt>, <tt>(new.= x y)</tt>, 
+     <tt>(new.&lt;= x y)</tt>, <tt>(new.&gt;= x y)</tt> oraz <tt>(new.&lt;&gt; x y)</tt>.
+     No built-in functions are allowed, except for <tt>&lt;</tt> and boolean functions.
+<br><br>
+
+
+</li><li>  Please define functions <tt>(nwd a b)</tt> and <tt>(nww a b)</tt>
+      whose values are the greatest common divisor and the least common multiple of (natural numbers) <tt>a</tt> and <tt>b</tt>.
+<br><br>
+ 
+
+</li><li> Please define functions <tt>(odd? n)</tt> and <tt>(even? n)</tt> checking whether a natural number <tt>n</tt> is odd or even, resp.
+     No built-in functions are allowed, except for <tt>#t</tt>, <tt>#f</tt>, <tt>zero?</tt> and a
+     function "<tt>-1</tt>" calculating <tt>n</tt>-1. 
+
+<br><br>
+
+
+</li><li> Please define a function <tt>(same-values? p1 p2 x y)</tt> whose value is <tt>#t</tt>, if <tt>p1(x,y)</tt> i <tt>p2(x,y)</tt> have the same value
+and <tt>#f</tt> otherwise.
+<pre>Examples: &gt; (same-values? = new.= 3 1)
+          #t
+          &gt; (same-values? &lt; &gt; 2 3)
+          #f
+          &gt; (same-values? + * 2 2)
+          #t
+</pre>
+
+
+</li><li> 		
+a) Please define a function <tt>(factorial n)</tt> whose value is <tt>n!</tt> using recursion.
+<br><br>
+																																																																																																																																																									
+b) The factorial function can also be defined the following way:
+
+<pre>  (define (factorial_help n i acc)
+      (if (&lt; n i)
+          acc
+          (factorial_help n (+ i 1) (* i acc))))
+
+   (define (factorial n)
+      (factorial_help n 1 1))
+</pre>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
+Please show how the expression <tt>(factorial 4)</tt> is evaluated,
+once for the recursive version a) and again for version b). <br>
+Note: The argument <tt>acc</tt> is called accumulator and one says that this version defines
+the faculty function using accumulation.
+<br><br>
+
+
+</li><li> a) Please define functions <tt>(fibonacci n)</tt> whose value is the <tt>n</tt>-th element of the
+Fibonacci sequence, one using recursion and again using accumulation. <br><br>
+b) For both versions please show how the expression <tt>(fibonacci 4)</tt> is evaluated. 
+ <br><br>
+
+
+</li><li>a) The exponentiation b^e (for natural numbers b and e) can be quickly executed using b^e = (b^(e/2))^2.<br>
+&nbsp;&nbsp;&nbsp;
+Using this property please define functions <tt>(exp b e)</tt> whose value is <tt>b^e</tt>, one recursive function and
+one using accumulation.<br><br>
+b) For both versions please show how the expression <tt>(exp 2 6)</tt> is evaluated. <br><br>
+
+
+</li><li> Why the expression <tt>if</tt> cannot be defined the following way?
+<pre>(define (new-if condition consequence alternative)
+   (cond (condition consequence)
+         (else      alternative)))
+</pre>
+
+
+</li><li> Please define a function <tt>(product term next a b)</tt> analogous to function <tt>sum</tt>. <br>
+     Please show, how the function <tt> product</tt> can be used to define both function
+     <tt>silnia</tt> and for the approximation of <font face="Symbol" size="2">p</font> using the formula &nbsp;  
+     <font face="Symbol" size="2">p</font>/4 = 2 · 4 · 4 · 6 · 6 · 8 ··· / 3 
+         · 3 · 5 · 5 · 7 · 7 ··· . <br><br>
+
+</li><li> Please define a function <tt>(accumulate combiner null-value term a next b)</tt>generalizing functions <tt>sum</tt> i <tt>product</tt>:
+     The arguments <tt>term</tt>, <tt>next</tt>, <tt>a</tt>, and <tt>b</tt> are the same as in the definitions of 
+     <tt>sum</tt> i <tt>prod</tt>. <br>  
+     <tt>combiner</tt> is a two-argument function describing, how <tt>(term a)</tt> is tied together 
+     with the recursive result.
+     <tt>null-value</tt> is the initial value used in the basic step of recursion. <br>
+     Please also show, how <tt>sum</tt> i <tt>product</tt> can be defined using
+     <tt>accumulate</tt>.
+<br><br>
+
+</li><li> Even function <tt>accumulate</tt> can be generalized:
+     Please define a function <tt>filter-accumulate</tt> with an additional argument <tt>pred</tt>. <br>
+     <tt>pred</tt> is a one-argument predicate and <tt>filter-accumulate</tt> ties <tt>(term a)</tt> to the result only if 
+     <tt>a</tt> fulfills <tt>pred</tt>.  <br>
+     Using <tt>filter-accumulate</tt> please compute the sum of squares of the prime numbers
+     in the interval [<tt>a</tt>,<tt>b</tt>]
+     and the product of the natural numbers <tt>i</tt> smaller than <tt>n</tt> for which <tt> nwd(i,n) = 1</tt>. 
+     <br> <br> 
+ 
+
+</li><li> Suppose the following definition of function <tt>f</tt>.
+<pre>(define f g) (g 2))
+</pre>
+Please show how the following expressions are evaluated.<br><br>
+
+a) <tt>(f square)</tt> <br><br>
+b) <tt>(f (lambda (z) (+ z (* 3 z)))</tt><br><br>
+c) <tt>(f f)</tt> <br><br>
+
+</li><li> Please define a function <tt>(root f a b)</tt> approximating a root of <tt>f</tt>
+     between <tt>a</tt> and <tt>b</tt> using the half-interval-method.<br><br>
+
+
+</li><li> Suppose the following function definitions are given.
+<pre>(define (comb f g)
+   (lambda (x) (f (g x))))
+
+(define (square n) (* n n))
+
+(define (double n) (+ n n))
+</pre>
+Please show how the following expression <tt>((comb square double) 5)</tt> is evaluated. <br><br>
+
+
+</li><li> Please define a function <tt>(iter f n)</tt>, whose value is the function <tt>f<sup>n</sup></tt>. <br><br>
+
+
+</li><li> Please define the following functions for lists.<br><br>
+a) <tt>(append l m)</tt>, whose value is the concatenation of the lists <tt>l</tt> i <tt>m</tt>.<br><br>
+b) <tt>(last l)</tt>, whose value is the last element of the list <tt>l</tt>.<br><br>
+c) <tt>(reverse l)</tt>, whose value is the list <tt>l</tt> in reversed order.<br><br>
+d) <tt>(delete x l)</tt>, whose value is the list <tt>l</tt> without the element <tt>x</tt>.<br><br> 
+e) <tt>(pairing l1 l2)</tt>, that builds a list of pairs out of the lists <tt>l1</tt> and <tt>l2</tt>. Example: 
+     <pre>&#8194;&#8195;&gt; (pairing '(1 2 3) '(a b c))
+  '((1.a) (2.b) (3.c)) </pre>
+f) <tt>(split x l)</tt>, that splits <tt>l</tt> into two lists <tt>l1</tt> and <tt>l2</tt>. 
+   <tt>l1</tt> contains the element of <tt>l</tt> smaller than
+      <tt>x</tt> and <tt>l2</tt> the elements greater than <tt>x</tt>. <br><br>
+
+
+<!--
+
+
+<li> Prosz&#x0119; napisa&#x0107; funkcj&#x0119; <tt>(member2 x l)</tt>, kt&#x00F3; sprawdza, czy gdzie&#x015B; w liscie <tt>l</tt> znajduje si&#x0119; <tt>x</tt>.
+<pre>Przyk&#x0142;ady: > (member2 'a '(b (c a) b))
+           #t
+           > (member2 '(a) '(b (c (a) d) e))
+           #t
+           > (member2 '(a) '(b c a))
+           #f
+</pre> 
+
+
+<li> Prosz&#x0119; zdefiniowa&#263; arytmetyk&#x0119; liczb wymiernich na podstawie liczb ca&#x0142;kowitych. <br><br>
+
+-->
+
+
+</li><li> a) Please define a function <tt> (square-list l)</tt>, whose value is the list of squares of all elements of <tt>l</tt>. <br><br>
+
+b) Please define a function <tt> (mapf f l)</tt>, whose value is the list of values <tt>f(e)</tt> for all elements <tt>e</tt> of <tt>l</tt>. <br><br>
+
+c) Please define a function <tt> (filter pred l)</tt>,  whose value is the list of all elements of <tt>l</tt>
+fulfilling pedicate <tt>pred</tt>.
+ <br><br>
+
+
+</li><li> Using lists to represent binary trees (see lecture notes) please define functions
+     <tt> (memberTree? element tree)</tt>, <tt>(sumTree tree)</tt>, <tt>(inorder tree)</tt> and <tt>(mapTree f tree)</tt>. <br><br>
+
+
+</li><li> 
+a) Please complete the definition of function <tt>deriv</tt> as presented in the lecture.<br><br>
+b) Please modify functions <tt>make-sum</tt> and <tt>make-product</tt> so that function <tt>deriv</tt>
+   returns normalized terms - this means for example <tt>y</tt> instead of <tt>(* y 1)</tt>. <br><br>
+c) Please complete the definition of function <tt>deriv</tt> tak, so that it can handle terms <tt>u^n</tt> 
+   for natural number <tt>n</tt> - using the rule
+<tt> d(u^n) / dx = n * u^(n-1) * du / dx </tt>. <br><br>
+
+
+</li><li> Please define a function <tt> (eval expression values)</tt> which evaluates boolean expressions. <br>
+<tt>expression</tt> is a list whose first element gives the "typ" of the boolean expression,
+the remaining elements are the subexpressions - 
+for example <tt>'(and x (not y))</tt> represents the expression <tt>x&#8743;¬y</tt>. <br>
+<tt> values</tt> is a list of variables together with their corresponding boolean value.
+<pre>Examples: &gt; (define values '((x . #f) (y . #t) (z . #f)))
+          values
+          &gt; (eval '(and y (not x)) values)
+          #t
+          &gt; (eval '(and y (and (not x) z))) values)
+          #f
+          &gt; (eval '(and y #t) values)
+          #t
+</pre>
+
+
+</li><li> Using function <tt>fold</tt> please define the following functions for lists. <br><br>
+     a) <tt>(prod l)</tt><br><br>
+     b) <tt>(length l)</tt><br><br>
+     c) <tt>(delete x l)</tt> <br><br>
+     d) <tt>(reverse l)</tt><br><br>
+     e) <tt>(map f l)</tt><br><br>
+     f) <tt>(filter pred l)</tt> <br><br>
+     g) <tt>(forall pred l)</tt>. <br><br>
+
+
+</li><li> Please complete the arithmetics of complex numbers as presented in the lecture<br><br>
+a) using manifest types. <br><br>
+b) using message passing. <br><br>
+c) Suppose the following definitions are given.
+<pre>   (define z1 (make-rectangular -1 3)) 
+   (define z2 (make-polar 2 -2)) 
+</pre>
+Please explain how the expression <tt> (angle (+c z1 z2))</tt> is evaluated. <br><br>
+
+
+</li><li> In <tt>Scheme</tt> one can define functions with an arbitrary number of arguments:
+<pre> (define (f x y z . l) (...))
+</pre>
+means, that function <tt> f </tt> has at least three arguments (<tt>x</tt>,<tt>y</tt> and <tt> z</tt>). 
+If <tt> f </tt> is called with more than three arguments the remaining ones are collecte in list <tt> l </tt>. <br><br> 
+a) Please define a function <tt> plus</tt>, which sums up any number of numbers.<br><br> 
+b) Please define a function <tt>par</tt> for an arbitrary number of (one-argumented) functions f<sub>i</sub>. <br>
+&nbsp;&nbsp;&nbsp; Function <tt>par</tt> returns a (one-argumented) function, 
+which for an argument <tt>x</tt> returns a list of all <tt>f<sub>i</sub>(x)</tt>. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;Example:
+<pre>   &gt; ((par id square cube) 3)
+   (3 9 27) 
+   &gt; ((par double double) 5)
+   (10 10)
+</pre>
+
+</li><li> Please - again - define a <tt>function (fibonacci n)</tt> whose value is the <tt>n</tt>-th element of the
+Fibonacci sequence - this time by computing the <tt>n</tt>-th power of the matrix <br><br> 
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mo data-mjx-texclass="OPEN">(</mo>
+  <mtable>
+    <mtr>
+      <mtd> <mn>1</mn> </mtd>
+      <mtd> <mn>1</mn> </mtd>
+    </mtr>
+    <mtr>
+      <mtd> <mn>1</mn> </mtd>
+      <mtd> <mn>0</mn> </mtd>
+    </mtr>
+  </mtable>
+ <mo data-mjx-texclass="CLOSE">)</mo>
+
+</math>
+
+</li><li> Suppose the following definitions are given.
+<pre>(define m 1)             (define n 1)
+(define (p m)            (define (q n)
+   (pp 5))                  (define (qq x)
+(define (pp x)                 (+ x n))
+   (+ x m))                 (qq 5))
+</pre> 
+What are the values of the expressions <tt>(p 11)</tt> and <tt>(q 11)</tt>? 
+Justify Your answers using the environment model. <br><br>
+
+
+</li><li> Suppose the following definitions are given.
+<pre>(define a 2)
+(define (p a)
+  (define (pp b)
+    (set! a (+ b 1))
+    (* a b))
+  (pp 2))</pre> 
+What is the value of the expression <tt>(p 5)</tt>? What is the value of <tt>a</tt> after evaluating <tt>(p 5)</tt>?
+Justify Your answers using the environment model. <br><br>
+
+
+</li><li> a) Please define a function <tt>(make-konto balance)</tt> generating an account 
+with <tt>balance</tt> dollars.
+The following operations should be possible:
+withdraw money, deposit money and checking <tt>balance</tt>. <br><br>
+
+b) Suppose now the following definition.
+<pre>   (define k1 (make-konto 100)) 
+</pre>
+&nbsp;&nbsp;&nbsp;&nbsp;Using the environment model please show, how the following expressions are evaluated.
+<pre>   &gt; ((k1 'withdraw) 40)
+   &gt; (k1 'balance)
+   &gt; ((k1 'deposit) 10)
+   &gt; (k1 'balance)
+</pre> 
+
+
+c) Please modify function <tt>make-konto</tt>, so that an account with a password is generated -
+that is operations are only carried out, if the correct password is given.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Example: 
+<pre>   (define k2 (make-konto 100 'password))
+   k2
+   &gt; ((k2 'passowrd 'withdraw) 40)
+   60
+   &gt; ((k2 'wrong-password 'withdraw) 20)
+   incorrect password
+</pre>
+
+</li><li> Please define a function <tt>(counting-version f)</tt>, where <tt>f</tt> is a one-argument function.
+Its value is a one-argument function, which - computes <tt>f</tt> and - counts how often <tt>f</tt> is called.
+Example:
+<pre>  &gt; (define sq (counting-version square))
+  sq
+  &gt; (sq 5)
+  25
+  &gt; (sq 7)
+  49
+  &gt; (sq 'how-often)
+  2
+  &gt; (sq 'reset)
+  0
+  &gt; (sq 'how-often)
+  0
+</pre>
+
+
+</li><li> a) Assume that the following expessions have been evaluated.<pre>&gt; (define x (mcons 'a (mcons 'b '())))
+&gt; (define z1 (mcons x x))
+&gt; (define z2 (mcons (mcons 'a (mcons 'b '()))
+                    (mcons (mcons 'a (mcons 'b '())) '())))
+&gt; (set-mcar! (mcar z1) 'g)
+&gt; (set-mcar! (mcar z2) 'g) 
+</pre>
+What are the values of <tt>z1</tt> and <tt>z2</tt>?<br><br>
+
+b) Please define a function <tt>(mlist l)</tt>, która transforming list <tt>l</tt>
+into a destructive list. <br><br>
+
+
+</li><li>  Please define a destructive version <tt>append!</tt> of <tt>append</tt>.
+What are the values of the following expressions?
+<pre>&gt; (define x '(a b)) <br>
+&gt; (define y '(c d)) <br>
+&gt; (append x y) <br>
+&gt; (cdr x) <br>
+&gt; (append! x y) <br>
+&gt; (mcdr x) 
+</pre>
+
+</li><li> Please implement stacks analogous to queues.<br><br>
+
+<!--
+
+<li> Na wyk&#x0142;adzie zosta&#x0142; podyskutowany <A HREF ="./simulator.scm">simulator</A> 
+     uk&#x0142;ad&#x00F3;w logicznych. <br><br>
+a) Prosz&#x0119; napisa&#x0107; funkcj&#x0119; <tt> (or-gate o1 o2 output)</tt>, kt&#x00F3;ra generuje 
+   bramk&#x0119; <tt>or</tt>. <br><br>
+b) Prosz&#x0119; napisa&#x0107; funkcj&#x0119; <tt> (full-adder a b c-in sum c-out)</tt>, kt&#x00F3;ra generuje
+   (pe&#x0142;ny) sumator. <br><br>
+c) Ripple-carry-adder, to uk&#x0142;ad, kt&#x00F3;ry sumuje dwie liczbe binarne <tt>a<sub>n</sub> ... a<sub>1</sub></tt> i <tt>b<sub>n</sub> ... b<sub>1</sub></tt>.
+   Wynik sumacji, to <tt>n</tt> bit&#x00F3;w <tt>s<sub>n</sub> ... s<sub>1</sub></tt> oraz jeden bit <tt>c</tt> (carry). 
+   &#160;&#160;
+   Prosz&#x0119; napisa&#x0107; funkcj&#x0119; <tt> (ripple-carry-adder A B S c)</tt>, kt&#x00F3;ra generuje takiego sumatora.
+   Argumenty <tt>A</tt>, <tt>B</tt> i <tt>S</tt> s&#x0105; listami kabl&#x00F3;w <tt>a<sub>i</sub></tt>, <tt>b<sub>i</sub></tt> i <tt>s<sub>i</sub></tt>, a <tt>c</tt> kablem carry. 
+   &#160;&#160;
+   Prosz&#x0119; wygenerowa&#x0107; ripple-carry-adder dla <tt>n</tt> = 4 bity i z nim obliczy&#x0107; 1011 + 0011 oraz 1011 + 0110.
+<br><br> 
+
+-->
+
+</li></ol>
+
+
+
+
+
+</body></html>
