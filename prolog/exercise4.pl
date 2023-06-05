@@ -1,30 +1,41 @@
 latin([], 0).
-latin([i], 1).
-latin([v], 5).
-latin([x], 10).
-latin([l], 50).
-latin([c], 100).
-latin([d], 500).
-latin([m], 1000).
-latin([i,i|T], N) :-
-    latin(T, X),
-    N is X + 2.
-latin([i,v|T], N) :-
-    latin(T, X),
-    N is X + 4.
-latin([i,x|T], N) :-
-    latin(T, X),
-    N is X + 9.
-latin([x,l|T], N) :-
-    latin(T, X),
-    N is X + 40.
-latin([x,c|T], N) :-
-    latin(T, X),
-    N is X + 90.
-latin([c,d|T], N) :-
-    latin(T, X),
-    N is X + 400.
-latin([c,m|T], N) :-
-    latin(T, X),
-    N is X + 900.
+latin([i | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 1.
+latin([v | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 5.
+latin([x | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 10.
+latin([l | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 50.
+latin([c | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 100.
+latin([d | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 500.
+latin([m | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 1000.
+latin([i, x | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 9.
+latin([i, v | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 4.
+latin([x, l | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 40.
+latin([x, c | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 90.
+latin([c, d | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 400.
+latin([c, m | Rest], Arabic) :-
+    latin(Rest, Subtotal),
+    Arabic is Subtotal + 900.
 
