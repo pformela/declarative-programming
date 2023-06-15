@@ -5,7 +5,11 @@ member(X, [H|_]).
 member(X, [_|T]) :- member(X, T).
 
 fac(0, 1).
-fac(N, Result) :- N > 0, N1 is N - 1, fac(N1, R1), Result is N * R1.
+fac(N, Result) :- 
+    N > 0, 
+    N1 is N - 1, 
+    fac(N1, R1), 
+    Result is N * R1.
 
 
 fib(0, 0).
